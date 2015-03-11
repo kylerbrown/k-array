@@ -40,13 +40,13 @@ cut_x = 6.5;
 cut_y = 4;
 module right_cut(){
   translate([-cut_x+block_x/2,cut_y,-delta])
-  rotate([0,0,-35]){
+  rotate([0,0,-32]){
     cube([5,15,10], center=true);
   }
 }
 module left_cut(){
   translate([cut_x+block_x/2,cut_y,-delta])
-  rotate([0,0,35]){
+  rotate([0,0,32]){
     cube([5,15,10], center=true);
   }
 }
