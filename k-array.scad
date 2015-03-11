@@ -2,7 +2,7 @@
 delta = 0.01; // prevent zero length walls.
 connector_x = 6.75; //width
 connector_z = 3.26; //height
-connector_y = 1.5; //length
+connector_y = 3.5; //length
 
 block_y = 4.5 + connector_y;
 block_z_base = 1;
@@ -36,24 +36,24 @@ module guide_cut(){
   }
 }
 
-cut_x = 5.5;
+cut_x = 6.5;
 cut_y = 4;
 module right_cut(){
   translate([-cut_x+block_x/2,cut_y,-delta])
-  rotate([0,0,-30]){
-    cube([5,10,10], center=true);
+  rotate([0,0,-35]){
+    cube([5,15,10], center=true);
   }
 }
 module left_cut(){
   translate([cut_x+block_x/2,cut_y,-delta])
-  rotate([0,0,30]){
-    cube([5,10,10], center=true);
+  rotate([0,0,35]){
+    cube([5,15,10], center=true);
   }
 }
 
 module top_cut(){
   translate([-delta,-1,connector_z])
-  rotate([-15,0,0]){
+  rotate([-10,0,0]){
     cube(20,5,5);
   }
 }
@@ -82,5 +82,5 @@ module main(){
 }
 
 main();
-
+//top_cut();
 
