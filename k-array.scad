@@ -1,7 +1,7 @@
 // units: mm
 delta = 0.01; // prevent zero length walls.
-connector_x = 6.75; //width
-connector_z = 3.26; //height
+connector_x = 6.7; //width
+connector_z = 3.28; //height
 connector_y = 3.5; //length
 
 block_y = 4.5 + connector_y;
@@ -52,8 +52,8 @@ module left_cut(){
 }
 
 module top_cut(){
-  translate([-delta,-1,connector_z])
-  rotate([-10,0,0]){
+  translate([-delta,3,connector_z])
+  rotate([-20,0,0]){
     cube(20,5,5);
   }
 }
