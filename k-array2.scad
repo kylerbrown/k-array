@@ -29,11 +29,11 @@ delta = 0.01; // prevent zero length walls.
 connector_x = 5.54;
 connector_z = 4.49;
 connector_y = 2.56;
-connector_wall_dia = .5;
+connector_wall_dia = 1.2;
 connector_cut_x = 1.5;
 
 block_x = 4;
-block_y = .5;
+block_y = 1.5;
 block_z = 6;
 
 cut_x = 2;
@@ -77,12 +77,24 @@ module block(){
 }
 
 leg_length = block_x;
-leg_dia = .5;
+leg_dia = 1.2;
 module block_with_legs(){
   union(){
     block();
     translate([0,0,1]){
-    cube([leg_length, leg_dia, leg_dia]);
+      difference(){
+	cube([leg_length, leg_dia, leg_dia]);
+	translate([5.0, -delta,-1]){
+	  rotate([0,-45,0]){
+	    cube([leg_length, leg_dia+2*delta, 10]);
+	  }
+	}
+	translate([-6.7, -delta,-1]){
+	  rotate([0,45,0]){
+	    cube([leg_length, leg_dia+2*delta, 10]);
+	  }
+	}
+      }
     }
   }
 
