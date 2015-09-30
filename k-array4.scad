@@ -28,8 +28,8 @@ delta = 0.01; // prevent zero length walls.
 
 connector_x = 5.6;
 connector_z = 4.5;
-connector_y = 2.7;
-connector_wall_dia = 1.1;
+connector_y = 3.0;
+connector_wall_dia = .7;
 connector_cut_x = 1.2;
 
 block_x = 4;
@@ -81,7 +81,7 @@ module block_with_legs(){
     block();
     translate([0,0,0]){
       difference(){
-	cube([leg_length, leg_dia, leg_dia]);
+	cube([leg_length, leg_dia, leg_dia*2]);
 	translate([5.0, -delta,-1]){
 	  rotate([0,-45,0]){
 	    cube([leg_length, leg_dia+2*delta, 10]);
@@ -136,7 +136,7 @@ module contact_guide(n0, length){
     cube([contact_spacing*(n0), contact_wall_depth, contact_h]);
     for (i = [1:n0]){
       translate([contact_spacing/(n0+1)+contact_spacing*(i-1), contact_wall_depth-contact_dia*1.5, -delta])
-	cube([contact_dia, contact_dia, contact_h+2*delta]);//*10+3*delta);
+	cube([contact_dia-delta, contact_dia-delta, contact_h+2*delta]);//*10+3*delta);
     }
   }
 }
@@ -148,12 +148,12 @@ module all_contact_guides(){
     contact_guide(n_front_contacts, connector_x);
   }
   
-  translate([-1*contact_wall_depth, -contact_wall_depth+delta, connector_z]){
+  translate([-1*contact_wall_depth+1, -contact_wall_depth+delta, connector_z]){
     rotate([180,0,90]){
       contact_guide(n_side_contacts, connector_y+4);
     }
   }
-  translate([connector_x+2*connector_wall_dia+contact_wall_depth,
+  translate([connector_x+2*connector_wall_dia+contact_wall_depth-contact_wall_depth*.2,
 	     -contact_wall_depth+delta, connector_z-contact_h]){
     rotate([0,0,90]){
       contact_guide(n_side_contacts, connector_y+4);
@@ -167,7 +167,7 @@ module full_array(){
   union(){
     connector_holder();
     translate([(connector_wall_dia + connector_x/2 - block_x/2),
-	       -block_y/2,
+	       -block_y + connector_wall_dia-delta,
 	       -block_z/2]){
       block_with_guide();
     }
